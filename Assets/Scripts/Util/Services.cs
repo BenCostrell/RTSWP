@@ -9,4 +9,5 @@ public static class Services {
     public static PrefabDB Prefabs { get; set; }
     public static SceneStackManager<TransitionData> SceneStackManager { get; set; }
     public static InputManager InputManager { get; set; }
+    public static Main Main { get; set; }
 }

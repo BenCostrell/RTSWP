@@ -15,4 +15,12 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject platform;
     public GameObject Platform { get { return platform; } }
+
+    [SerializeField]
+    private GameObject resource;
+    public GameObject Resource { get { return resource; } }
+
+    [SerializeField]
+    private GameObject mine;
+    public GameObject Mine { get { return mine; } }
 }

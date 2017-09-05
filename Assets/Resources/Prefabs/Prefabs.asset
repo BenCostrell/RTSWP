@@ -16,3 +16,5 @@ MonoBehaviour:
   - {fileID: 1769207381073088, guid: 3e64be3a118b7d2488facd7f98dcca57, type: 2}
   - {fileID: 1858779636021200, guid: 66aa4335767392c409182ce05110d90d, type: 2}
   platform: {fileID: 1029680092869034, guid: 81b0e2bc2714a154e933e7a232a5c22b, type: 2}
+  resource: {fileID: 1154027219905268, guid: a4b970bc16f98ff4d969028d84387a93, type: 2}
+  mine: {fileID: 1079257369312996, guid: a7d1589114c9d674f8c6c27a7e126980, type: 2}

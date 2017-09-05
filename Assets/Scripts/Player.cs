@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private Collider2D col;
+    public Color color { get; private set; }
     [SerializeField]
     private float groundAccel;
     [SerializeField]
@@ -25,6 +26,18 @@ public class Player : MonoBehaviour {
     private float platformDropThreshold;
     private Collider2D currentPlatformCollider;
     private List<Collider2D> currentlyIgnoredPlatforms;
+    private int resourceCount_;
+    private int resourceCount
+    {
+        get { return resourceCount_; }
+        set
+        {
+            resourceCount_ = value;
+            resourceUI.text = value.ToString();
+        }
+    }
+    private TextMesh resourceUI;
+    private Building currentAdjacentBuilding;
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -38,11 +51,14 @@ public class Player : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        resourceUI = GetComponentInChildren<TextMesh>();
         currentlyIgnoredPlatforms = new List<Collider2D>();
         playerNum = playerNum_;
         transform.position = Services.Main.playerSpawns[playerNum - 1];
-        sr.color = Services.Main.playerColors[playerNum - 1];
+        color = Services.Main.playerColors[playerNum - 1];
+        sr.color = color;
         Services.EventManager.Register<ButtonPressed>(OnButtonPressed);
+        resourceCount = 0;
     }
 
     void Move()
@@ -66,9 +82,19 @@ public class Player : MonoBehaviour {
     void OnButtonPressed(ButtonPressed e)
     {
         if (e.playerNum == playerNum) {
-            if (e.button == "A")
+            switch (e.button)
             {
-                if (grounded) Jump();
+                case "A":
+                    if (grounded) Jump();
+                    break;
+                case "B":
+                    if(currentAdjacentBuilding != null && 
+                        resourceCount >= currentAdjacentBuilding.cost &&
+                        currentAdjacentBuilding.owner != this)
+                    {
+                        ClaimBuilding(currentAdjacentBuilding);
+                    }
+                    break;
             }
         }
     }
@@ -99,6 +125,19 @@ public class Player : MonoBehaviour {
         GameObject other = collision.gameObject;
         if(other.layer == Services.Main.groundLayer)
         {
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject other = collision.gameObject;
+        if(other.GetComponent<Resource>() != null)
+        {
+            PickUpResource(other.GetComponent<Resource>());
+        }
+        if(other.GetComponent<Building>() != null)
+        {
+            currentAdjacentBuilding = other.GetComponent<Building>();
         }
     }
 
@@ -135,5 +174,25 @@ public class Player : MonoBehaviour {
                 transform.position.x,
                 Services.Main.topOfScreen);
         }
+    }
+
+    void PickUpResource(Resource resource)
+    {
+        if (!resource.pickedUp)
+        {
+            resourceCount += resource.value;
+            resource.GetPickedUp();
+        }
+    }
+
+    public void GetPayout(int numResources)
+    {
+        resourceCount += numResources;
+    }
+
+    void ClaimBuilding(Building building)
+    {
+        resourceCount -= building.cost;
+        building.GetClaimed(this);
     }
 }

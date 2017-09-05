@@ -7,12 +7,6 @@ public class Main : Scene<TransitionData> {
     public List<Player> players { get; private set; }
     public Vector3[] playerSpawns;
     public Color[] playerColors;
-    [SerializeField]
-    private int numPlatforms;
-    [SerializeField]
-    private Vector3 platformBasePos;
-    [SerializeField]
-    private Vector3 platformSpacing;
     public LayerMask groundLayer;
     public float rightBoundary;
     public float leftBoundary;
@@ -23,7 +17,9 @@ public class Main : Scene<TransitionData> {
     {
         InitializeServices();
         InitializePlayers();
-        GenerateMap();
+        Services.MapManager.GetPlatforms();
+        Services.MapManager.GenerateBuildings();
+        Services.ResourceManager.GenerateInitialResources();
     }
 
     // Update is called once per frame
@@ -34,6 +30,8 @@ public class Main : Scene<TransitionData> {
     void InitializeServices()
     {
         Services.Main = this;
+        Services.ResourceManager = GetComponentInChildren<ResourceManager>();
+        Services.MapManager = GetComponentInChildren<MapManager>();
     }
 
     void InitializePlayers()
@@ -49,16 +47,5 @@ public class Main : Scene<TransitionData> {
         Player player = playerObj.GetComponent<Player>();
         player.Init(playerNum);
         return player;
-    }
-
-    void GenerateMap()
-    {
-        //for (int i = 0; i < numPlatforms; i++)
-        //{
-        //    Instantiate(Services.Prefabs.Platform,
-        //        platformBasePos + i * platformSpacing,
-        //        Quaternion.identity,
-        //        Services.Main.transform);
-        //}
     }
 }

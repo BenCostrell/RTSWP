@@ -61,6 +61,7 @@ public class Mine : Building {
         base.Init(pos);
         resourcesPerTick = baseResourcesPerTick;
         timeSincePayout = 0;
+        type = BuildingType.Mine;
     }
 
     void IncreasePayoutRate()

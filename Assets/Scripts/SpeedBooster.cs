@@ -18,4 +18,10 @@ public class SpeedBooster : Building {
         base.OnClaimLost(player);
         player.groundAccel /= speedBoostFactor;
     }
+
+    public override void Init(Vector2 pos)
+    {
+        base.Init(pos);
+        type = BuildingType.SpeedBoost;
+    }
 }

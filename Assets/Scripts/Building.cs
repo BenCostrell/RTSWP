@@ -6,9 +6,10 @@ public abstract class Building : MonoBehaviour {
 
     public enum BuildingType
     {
-        Monument,
+        Nexus,
         Mine,
-        SpeedBoost
+        SpeedBoost,
+        Market
     }
     [SerializeField]
     protected int baseCost;

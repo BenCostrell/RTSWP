@@ -537,7 +537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce445bd247a109498114fde59cefdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mineCount: 5
+  mineCount: 3
+  speedBoosterCount: 2
+  marketCount: 2
   minSeparationDist: 5
   maxTriesProcGen: 200
   spawnPosOffset: {x: 0, y: 0.6}
@@ -554,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialResourceCount: 20
-  resourceSpawnRate: 0.5
+  resourceSpawnRate: 1
   spawnPosOffset: {x: 0, y: 1}
   minSeparationDist: 3
   maxTriesProcGen: 200

@@ -46,5 +46,6 @@ public class Nexus : Building {
             controlTimes[i] = controlTimeWinThreshold;
             counterTextMeshes[i].text = controlTimes[i].ToString();
         }
+        type = BuildingType.Nexus;
     }
 }

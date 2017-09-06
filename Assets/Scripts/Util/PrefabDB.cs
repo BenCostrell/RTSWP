@@ -31,4 +31,8 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject speedBooster;
     public GameObject SpeedBooster { get { return speedBooster; } }
+
+    [SerializeField]
+    private GameObject market;
+    public GameObject Market { get { return market; } }
 }

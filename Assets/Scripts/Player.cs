@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
     }
     private TextMesh resourceUI;
     private Building currentAdjacentBuilding;
+    public int resourceValueFactor;
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour {
         sr.color = color;
         Services.EventManager.Register<ButtonPressed>(OnButtonPressed);
         resourceCount = 0;
+        resourceValueFactor = 1;
         groundAccel = baseGroundAccel;
     }
 
@@ -183,7 +185,7 @@ public class Player : MonoBehaviour {
     {
         if (!resource.pickedUp)
         {
-            resourceCount += resource.value;
+            resourceCount += (resource.value * resourceValueFactor);
             resource.GetPickedUp();
         }
     }

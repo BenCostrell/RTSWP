@@ -9,6 +9,10 @@ public class MapManager : MonoBehaviour {
     [SerializeField]
     private int mineCount;
     [SerializeField]
+    private int speedBoosterCount;
+    [SerializeField]
+    private int marketCount;
+    [SerializeField]
     private float minSeparationDist;
     [SerializeField]
     private float maxTriesProcGen;
@@ -31,46 +35,50 @@ public class MapManager : MonoBehaviour {
     public void GenerateBuildings()
     {
         buildings = new List<Building>();
-        SpawnNexus();
-        SpawnSpeedBooster();
-        SpawnMines();
-    }
-
-    void SpawnMines()
-    {
+        SpawnBuilding(Building.BuildingType.Nexus);
+        for (int i = 0; i < speedBoosterCount; i++)
+        {
+            SpawnBuilding(Building.BuildingType.SpeedBoost);
+        }
+        for (int i = 0; i < marketCount; i++)
+        {
+            SpawnBuilding(Building.BuildingType.Market);
+        }
         for (int i = 0; i < mineCount; i++)
         {
-            bool successfulSpawn = SpawnMine();
-            if (!successfulSpawn) break;
+            SpawnBuilding(Building.BuildingType.Mine);
         }
     }
 
-    void SpawnNexus()
+    void SpawnBuilding(Building.BuildingType buildingType)
     {
-        Nexus nexus = Instantiate(Services.Prefabs.Nexus, Services.Main.transform).
-            GetComponent<Nexus>();
-        nexus.Init(nexusSpawnPos);
-        buildings.Add(nexus);
-    }
-
-    void SpawnSpeedBooster()
-    {
+        Building building = null;
         Vector2 pos = GenerateValidPosition();
-        SpeedBooster speedBooster = Instantiate(Services.Prefabs.SpeedBooster,
-            Services.Main.transform).GetComponent<SpeedBooster>();
-        speedBooster.Init(pos);
-        buildings.Add(speedBooster);
-    }
-
-    bool SpawnMine()
-    {
-        Vector2 pos = GenerateValidPosition();
-        if (pos == Vector2.zero) return false;
-        else
+        if (pos == Vector2.zero) return;
+        switch (buildingType)
         {
-            GenerateMine(pos);
-            return true;
+            case Building.BuildingType.Nexus:
+                building = Instantiate(Services.Prefabs.Nexus, Services.Main.transform).
+                    GetComponent<Building>();
+                pos = nexusSpawnPos;
+                break;
+            case Building.BuildingType.Mine:
+                building = Instantiate(Services.Prefabs.Mine, Services.Main.transform).
+                    GetComponent<Building>();
+                break;
+            case Building.BuildingType.SpeedBoost:
+                building = Instantiate(Services.Prefabs.SpeedBooster, Services.Main.transform).
+                    GetComponent<Building>();
+                break;
+            case Building.BuildingType.Market:
+                building = Instantiate(Services.Prefabs.Market, Services.Main.transform).
+                    GetComponent<Building>();
+                break;
+            default:
+                break;
         }
+        building.Init(pos);
+        buildings.Add(building);
     }
 
     void GenerateMine(Vector2 pos)

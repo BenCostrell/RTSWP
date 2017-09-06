@@ -21,3 +21,4 @@ MonoBehaviour:
   nexus: {fileID: 1348001619180936, guid: 48021c63f881ce240a60032a6aa04f3e, type: 2}
   speedBooster: {fileID: 1236176916185264, guid: 3097602afcf6c0744ab67b1317e64fef,
     type: 2}
+  market: {fileID: 1972941502783854, guid: 3b115e2416df80f438b9b2a703f69bd1, type: 2}

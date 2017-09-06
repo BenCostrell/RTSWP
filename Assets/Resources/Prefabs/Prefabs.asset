@@ -17,4 +17,7 @@ MonoBehaviour:
   - {fileID: 1858779636021200, guid: 66aa4335767392c409182ce05110d90d, type: 2}
   platform: {fileID: 1029680092869034, guid: 81b0e2bc2714a154e933e7a232a5c22b, type: 2}
   resource: {fileID: 1154027219905268, guid: a4b970bc16f98ff4d969028d84387a93, type: 2}
-  mine: {fileID: 1079257369312996, guid: a7d1589114c9d674f8c6c27a7e126980, type: 2}
+  mine: {fileID: 1874131051711892, guid: cdb9cc21832bf1247ac31e7855a229ff, type: 2}
+  nexus: {fileID: 1348001619180936, guid: 48021c63f881ce240a60032a6aa04f3e, type: 2}
+  speedBooster: {fileID: 1236176916185264, guid: 3097602afcf6c0744ab67b1317e64fef,
+    type: 2}

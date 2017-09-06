@@ -50,9 +50,9 @@ public abstract class Building : MonoBehaviour {
         borderSr.color = player.color;
     }
 
-    protected abstract void OnClaim(Player player);
+    protected virtual void OnClaim(Player player) { }
 
-    protected abstract void OnClaimLost(Player player);
+    protected virtual void OnClaimLost(Player player) { }
 
     public virtual void Init(Vector2 pos)
     {

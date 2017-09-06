@@ -191,7 +191,7 @@ TextMesh:
   m_Anchor: 7
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 130
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: b1368cfa27ea32946ba7f19146e47de0, type: 3}
@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2140a208a1e83c4db0e067e9a875f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseGroundAccel: 2
   groundAccel: 2
   aerialAccel: 1
   groundDrag: 0.9

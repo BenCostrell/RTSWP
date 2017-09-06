@@ -23,4 +23,12 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject mine;
     public GameObject Mine { get { return mine; } }
+
+    [SerializeField]
+    private GameObject nexus;
+    public GameObject Nexus { get { return nexus; } }
+
+    [SerializeField]
+    private GameObject speedBooster;
+    public GameObject SpeedBooster { get { return speedBooster; } }
 }

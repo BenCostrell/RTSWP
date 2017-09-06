@@ -14,6 +14,8 @@ public class MapManager : MonoBehaviour {
     private float maxTriesProcGen;
     [SerializeField]
     private Vector2 spawnPosOffset;
+    [SerializeField]
+    private Vector2 nexusSpawnPos;
 
 	public void GetPlatforms()
     {
@@ -29,12 +31,35 @@ public class MapManager : MonoBehaviour {
     public void GenerateBuildings()
     {
         buildings = new List<Building>();
+        SpawnNexus();
+        SpawnSpeedBooster();
+        SpawnMines();
+    }
+
+    void SpawnMines()
+    {
         for (int i = 0; i < mineCount; i++)
         {
             bool successfulSpawn = SpawnMine();
             if (!successfulSpawn) break;
         }
+    }
 
+    void SpawnNexus()
+    {
+        Nexus nexus = Instantiate(Services.Prefabs.Nexus, Services.Main.transform).
+            GetComponent<Nexus>();
+        nexus.Init(nexusSpawnPos);
+        buildings.Add(nexus);
+    }
+
+    void SpawnSpeedBooster()
+    {
+        Vector2 pos = GenerateValidPosition();
+        SpeedBooster speedBooster = Instantiate(Services.Prefabs.SpeedBooster,
+            Services.Main.transform).GetComponent<SpeedBooster>();
+        speedBooster.Init(pos);
+        buildings.Add(speedBooster);
     }
 
     bool SpawnMine()

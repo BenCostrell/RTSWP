@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private int playerNum;
+    public int playerNum { get; private set; }
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private Collider2D col;
     public Color color { get; private set; }
     [SerializeField]
-    private float groundAccel;
+    private float baseGroundAccel;
+    [HideInInspector]
+    public float groundAccel;
     [SerializeField]
     private float aerialAccel;
     [SerializeField]
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour {
         sr.color = color;
         Services.EventManager.Register<ButtonPressed>(OnButtonPressed);
         resourceCount = 0;
+        groundAccel = baseGroundAccel;
     }
 
     void Move()

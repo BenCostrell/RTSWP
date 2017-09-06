@@ -48,4 +48,9 @@ public class Main : Scene<TransitionData> {
         player.Init(playerNum);
         return player;
     }
+
+    public void GameWin(Player player)
+    {
+        Debug.Log("player " + player.playerNum + " has won");
+    }
 }
